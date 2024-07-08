@@ -1,0 +1,32 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:ecommt/utils/constants/sizes.dart';
+import 'package:flutter/material.dart';
+
+class TGridLayout extends StatelessWidget {
+  const TGridLayout(
+      {Key? key,
+      required this.itemCount,
+      this.mainAxisExtent = 288,
+      required this.itemBuilder})
+      : super(key: key);
+
+  final int itemCount;
+  final double? mainAxisExtent;
+  final Widget? Function(BuildContext, int) itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+        itemCount: 4,
+        shrinkWrap: true,
+        padding: EdgeInsets.zero,
+        physics: NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: TSizes.gridViewSpacing,
+            crossAxisSpacing: TSizes.gridViewSpacing,
+            mainAxisExtent: mainAxisExtent),
+        itemBuilder: itemBuilder);
+  }
+}
