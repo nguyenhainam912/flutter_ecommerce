@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "821061575124",
+    "project_id": "ecomt-36024",
+    "storage_bucket": "ecomt-36024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:821061575124:android:cabe6442ab08174fe5f641",
+        "android_client_info": {
+          "package_name": "com.example.ecommt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANa3bUKVSLeGs2_pNL-CxdkWwX12YCSJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

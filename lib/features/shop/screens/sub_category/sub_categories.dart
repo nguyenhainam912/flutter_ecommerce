@@ -7,7 +7,6 @@ import 'package:ecommt/common/widgets/texts/section_heading.dart';
 import 'package:ecommt/utils/constants/image_strings.dart';
 import 'package:ecommt/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class SubCategoriesScreen extends StatelessWidget {
   const SubCategoriesScreen({super.key});

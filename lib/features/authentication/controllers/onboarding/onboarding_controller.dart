@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:ecommt/features/authentication/screens/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class OnBoardingController extends GetxController {
   static OnBoardingController get instance => Get.find();
@@ -21,6 +24,9 @@ class OnBoardingController extends GetxController {
   // update current index & jump to next page
   void nextPage() {
     if (currentPageIndex.value == 2) {
+      final deviceStorage = GetStorage();
+
+      deviceStorage.write("IsFirstTime", false);
       Get.offAll(LoginScreen());
     } else {
       int page = currentPageIndex.value + 1;

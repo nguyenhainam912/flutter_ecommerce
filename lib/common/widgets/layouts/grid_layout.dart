@@ -5,11 +5,10 @@ import 'package:flutter/material.dart';
 
 class TGridLayout extends StatelessWidget {
   const TGridLayout(
-      {Key? key,
+      {super.key,
       required this.itemCount,
       this.mainAxisExtent = 288,
-      required this.itemBuilder})
-      : super(key: key);
+      required this.itemBuilder});
 
   final int itemCount;
   final double? mainAxisExtent;

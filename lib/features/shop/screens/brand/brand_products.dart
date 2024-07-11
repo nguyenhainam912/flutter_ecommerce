@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:ecommt/common/widgets/appbar/appbar.dart';
 import 'package:ecommt/common/widgets/brands/brand_card.dart';
@@ -7,7 +7,7 @@ import 'package:ecommt/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class BrandProducts extends StatelessWidget {
-  const BrandProducts({Key? key}) : super(key: key);
+  const BrandProducts({super.key});
 
   @override
   Widget build(BuildContext context) {

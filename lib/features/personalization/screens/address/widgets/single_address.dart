@@ -8,8 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class TSingleAddress extends StatelessWidget {
-  const TSingleAddress({Key? key, required this.selectedAddress})
-      : super(key: key);
+  const TSingleAddress({super.key, required this.selectedAddress});
 
   final bool selectedAddress;
   @override

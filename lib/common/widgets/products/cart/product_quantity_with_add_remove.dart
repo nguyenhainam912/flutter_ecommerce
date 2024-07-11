@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:ecommt/common/widgets/icons/t_circular_icon.dart';
 import 'package:ecommt/utils/constants/colors.dart';
 import 'package:ecommt/utils/constants/sizes.dart';
@@ -19,8 +21,8 @@ class TProductQuantityWithAddRemove extends StatelessWidget {
       children: [
         TCircularIcon(
           icon: Iconsax.minus,
-          width: 32,
-          height: 32,
+          width: 38,
+          height: 38,
           size: TSizes.md,
           color: dark ? TColors.white : TColors.black,
           backgroundColor: dark ? TColors.darkGrey : TColors.light,
@@ -34,8 +36,8 @@ class TProductQuantityWithAddRemove extends StatelessWidget {
         ),
         TCircularIcon(
           icon: Iconsax.add,
-          width: 32,
-          height: 32,
+          width: 38,
+          height: 38,
           size: TSizes.md,
           color: TColors.white,
           backgroundColor: TColors.primary,

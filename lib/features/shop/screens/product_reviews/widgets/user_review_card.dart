@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_super_parameters
 
 import 'package:ecommt/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:ecommt/common/widgets/products/ratings/rating_bar_indicator.dart';

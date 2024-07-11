@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:ecommt/common/widgets/image_text_widget.dart/vertical_image_text.dart';
 import 'package:ecommt/features/shop/screens/sub_category/sub_categories.dart';
 import 'package:ecommt/utils/constants/image_strings.dart';

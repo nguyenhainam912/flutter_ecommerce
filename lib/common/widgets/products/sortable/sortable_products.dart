@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:ecommt/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommt/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:ecommt/utils/constants/sizes.dart';

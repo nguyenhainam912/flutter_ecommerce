@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:ecommt/common/widgets/texts/brand_title_text.dart';
 import 'package:ecommt/utils/constants/colors.dart';
 import 'package:ecommt/utils/constants/enums.dart';

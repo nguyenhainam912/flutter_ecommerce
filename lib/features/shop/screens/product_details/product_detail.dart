@@ -14,7 +14,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductDetail extends StatelessWidget {
-  const ProductDetail({Key? key}) : super(key: key);
+  const ProductDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +36,15 @@ class ProductDetail extends StatelessWidget {
                     children: [
                       /// rating & share button
                       TRatingAndShare(),
+                      SizedBox(
+                        height: TSizes.spaceBtwItems,
+                      ),
 
                       /// price, title, stock, bard
                       TProductMetaData(),
+                      SizedBox(
+                        height: TSizes.spaceBtwItems,
+                      ),
 
                       /// attributer
                       TProductAttributes(),
@@ -51,6 +57,9 @@ class ProductDetail extends StatelessWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                               onPressed: () {}, child: Text("Checkout"))),
+                      SizedBox(
+                        height: TSizes.spaceBtwSections,
+                      ),
 
                       /// description
                       TSectionHeading(

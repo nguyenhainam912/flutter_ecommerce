@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_super_parameters
 
 import 'package:ecommt/common/widgets/chips/choice_chip.dart';
 import 'package:ecommt/common/widgets/custom_shapes/containers/rounded_container.dart';
@@ -8,9 +8,7 @@ import 'package:ecommt/common/widgets/texts/section_heading.dart';
 import 'package:ecommt/utils/constants/colors.dart';
 import 'package:ecommt/utils/constants/sizes.dart';
 import 'package:ecommt/utils/helpers/helper_functions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class TProductAttributes extends StatelessWidget {
   const TProductAttributes({Key? key}) : super(key: key);

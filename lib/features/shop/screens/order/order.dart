@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:ecommt/common/widgets/appbar/appbar.dart';
 import 'package:ecommt/features/shop/screens/order/widgets/order_list_item.dart';
 import 'package:ecommt/utils/constants/sizes.dart';

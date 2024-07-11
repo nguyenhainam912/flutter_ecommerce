@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommt/utils/constants/colors.dart';
 import 'package:ecommt/utils/constants/sizes.dart';
 import 'package:ecommt/utils/helpers/helper_functions.dart';
@@ -34,11 +35,20 @@ class TCircularImage extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
             color: backgroundColor ?? (dark ? TColors.white : TColors.dark)),
-        child: Image(
-            fit: fit,
-            image: isNetworkImage
-                ? NetworkImage(image)
-                : AssetImage(image) as ImageProvider,
-            color: overlayColor));
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(100),
+          child: Center(
+            child: isNetworkImage
+                ? CachedNetworkImage(
+                    imageUrl: image,
+                    fit: fit,
+                    color: overlayColor,
+                    progressIndicatorBuilder: (context, url, error) =>
+                        Icon(Icons.error),
+                  )
+                : Image(
+                    fit: fit, image: AssetImage(image), color: overlayColor),
+          ),
+        ));
   }
 }

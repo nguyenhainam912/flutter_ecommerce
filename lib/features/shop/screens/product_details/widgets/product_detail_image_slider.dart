@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:ecommt/common/widgets/appbar/appbar.dart';
 import 'package:ecommt/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
 import 'package:ecommt/common/widgets/icons/t_circular_icon.dart';

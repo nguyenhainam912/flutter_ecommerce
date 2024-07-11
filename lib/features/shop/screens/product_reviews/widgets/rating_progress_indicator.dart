@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:ecommt/utils/constants/colors.dart';
 import 'package:ecommt/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';

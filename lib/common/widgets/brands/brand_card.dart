@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:ecommt/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:ecommt/common/widgets/images/t_circular_image.dart';
 import 'package:ecommt/common/widgets/texts/brand_title_text_with_verified_icon.dart';

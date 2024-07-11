@@ -53,13 +53,13 @@ class TProductMetaData extends StatelessWidget {
           ],
         ),
         SizedBox(
-          width: TSizes.spaceBtwItems / 1.5,
+          height: TSizes.spaceBtwItems / 1.5,
         ),
 
         /// title
         TProductTitleText(title: "Green Nike Sport"),
         SizedBox(
-          width: TSizes.spaceBtwItems / 1.5,
+          height: TSizes.spaceBtwItems / 1.5,
         ),
 
         // stock status
@@ -71,7 +71,7 @@ class TProductMetaData extends StatelessWidget {
           ],
         ),
         SizedBox(
-          width: TSizes.spaceBtwItems / 1.5,
+          height: TSizes.spaceBtwItems / 1.5,
         ),
 
         /// brand
@@ -81,7 +81,10 @@ class TProductMetaData extends StatelessWidget {
               image: TImages.shoeIcon,
               width: 32,
               height: 32,
-              overlayColor: dark ? TColors.white : TColors.black,
+              overlayColor: dark ? TColors.black : TColors.white,
+            ),
+            SizedBox(
+              width: TSizes.spaceBtwItems,
             ),
             TBrandTitleWithVerifiedIcon(
               title: 'Nike',

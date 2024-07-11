@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:ecommt/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:ecommt/utils/constants/sizes.dart';
 import 'package:ecommt/utils/device/device_utility.dart';
