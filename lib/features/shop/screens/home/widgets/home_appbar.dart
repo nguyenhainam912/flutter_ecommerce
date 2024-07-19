@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:ecommt/common/widgets/appbar/appbar.dart';
 import 'package:ecommt/common/widgets/product_cart/cart_menu_item.dart';
 import 'package:ecommt/common/widgets/shimmer/shimmer_effect.dart';
@@ -42,7 +44,6 @@ class THomeAppBar extends StatelessWidget {
       ),
       actions: [
         TCartCounterIcon(
-          onPressed: () {},
           iconColor: TColors.white,
         )
       ],

@@ -5,152 +5,152 @@ import 'package:ecommt/common/widgets/custom_shapes/containers/rounded_container
 import 'package:ecommt/common/widgets/texts/product_price_text.dart';
 import 'package:ecommt/common/widgets/texts/product_title_text.dart';
 import 'package:ecommt/common/widgets/texts/section_heading.dart';
+import 'package:ecommt/features/shop/controllers/product/variation_controller.dart';
+import 'package:ecommt/features/shop/models/product_model.dart';
 import 'package:ecommt/utils/constants/colors.dart';
 import 'package:ecommt/utils/constants/sizes.dart';
 import 'package:ecommt/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TProductAttributes extends StatelessWidget {
-  const TProductAttributes({Key? key}) : super(key: key);
-
+  const TProductAttributes({Key? key, required this.product}) : super(key: key);
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(VariationController());
     final dark = THelperFunctions.isDarkMode(context);
 
-    return Column(
-      children: [
-        /// slected attribute pricing & description
-        TRoundedContainer(
-          padding: EdgeInsets.all(TSizes.md),
-          backgroundColor: dark ? TColors.darkGrey : TColors.grey,
-          child: Column(
-            children: [
-              /// title price stock status
-              Row(
+    return Obx(
+      () => Column(
+        children: [
+          /// slected attribute pricing & description
+          if (controller.selectedVariation.value.id.isNotEmpty)
+            TRoundedContainer(
+              padding: EdgeInsets.all(TSizes.md),
+              backgroundColor: dark ? TColors.darkGrey : TColors.grey,
+              child: Column(
                 children: [
-                  TSectionHeading(
-                    title: 'Variation',
-                    showActionButton: false,
-                  ),
-                  SizedBox(
-                    width: TSizes.spaceBtwItems,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  /// title price stock status
+                  Row(
                     children: [
-                      Row(
+                      TSectionHeading(
+                        title: 'Variation',
+                        showActionButton: false,
+                      ),
+                      SizedBox(
+                        width: TSizes.spaceBtwItems,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TProductTitleText(
-                            title: "Price",
-                            smallSize: true,
+                          Row(
+                            children: [
+                              TProductTitleText(
+                                title: "Price",
+                                smallSize: true,
+                              ),
+
+                              // actual price
+                              if (controller.selectedVariation.value.salePrice >
+                                  0)
+                                Text(
+                                    "\$${controller.selectedVariation.value.price}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall!
+                                        .apply(
+                                            decoration:
+                                                TextDecoration.lineThrough)),
+                              SizedBox(
+                                width: TSizes.spaceBtwItems,
+                              ),
+                              // sale price
+                              TProductPriceText(
+                                price: controller.getVariationPrice(),
+                              )
+                            ],
                           ),
 
-                          // actual price
-                          Text("\$25",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .apply(
-                                      decoration: TextDecoration.lineThrough)),
-                          SizedBox(
-                            width: TSizes.spaceBtwItems,
-                          ),
-                          // sale price
-                          TProductPriceText(
-                            price: '20',
+                          /// stock
+                          Row(
+                            children: [
+                              TProductTitleText(
+                                title: "Stock",
+                                smallSize: true,
+                              ),
+                              Text(controller.variationStockStatus.value,
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium)
+                            ],
                           )
                         ],
                       ),
-
-                      /// stock
-                      Row(
-                        children: [
-                          TProductTitleText(
-                            title: "Stock",
-                            smallSize: true,
-                          ),
-                          Text("In Stock",
-                              style: Theme.of(context).textTheme.titleMedium)
-                        ],
-                      )
                     ],
                   ),
+
+                  /// variation description
+                  TProductTitleText(
+                    title: controller.selectedVariation.value.description ?? '',
+                    smallSize: true,
+                    maxLines: 4,
+                  )
                 ],
               ),
-
-              /// variation description
-              TProductTitleText(
-                title: "This is the description of the product",
-                smallSize: true,
-                maxLines: 4,
-              )
-            ],
+            ),
+          SizedBox(
+            height: TSizes.spaceBtwItems,
           ),
-        ),
-        SizedBox(
-          height: TSizes.spaceBtwItems,
-        ),
 
-        ///attributes
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TSectionHeading(
-              title: "Colors",
-              showActionButton: false,
-            ),
-            SizedBox(
-              height: TSizes.spaceBtwItems / 2,
-            ),
-            Wrap(
-              spacing: 8,
-              children: [
-                TChoiceChip(
-                  text: "Green",
-                  selected: true,
-                ),
-                TChoiceChip(
-                  text: "Blue",
-                  selected: false,
-                ),
-                TChoiceChip(
-                  text: "Yellow",
-                  selected: false,
-                ),
-              ],
-            ),
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TSectionHeading(
-              title: "Size",
-              showActionButton: false,
-            ),
-            SizedBox(
-              height: TSizes.spaceBtwItems / 2,
-            ),
-            Wrap(
-              spacing: 8,
-              children: [
-                TChoiceChip(
-                  text: "EU 34",
-                  selected: true,
-                ),
-                TChoiceChip(
-                  text: "EU 36",
-                  selected: false,
-                ),
-                TChoiceChip(
-                  text: "EU 38",
-                  selected: false,
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
+          ///attributes
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: product.productAttributes!
+                .map((attribute) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TSectionHeading(
+                          title: attribute.name ?? '',
+                          showActionButton: false,
+                        ),
+                        SizedBox(
+                          height: TSizes.spaceBtwItems / 2,
+                        ),
+                        Obx(
+                          () => Wrap(
+                            spacing: 8,
+                            children: attribute.values!.map((attributeValue) {
+                              final isSelected = controller
+                                      .selectedAttributes[attribute.name] ==
+                                  attributeValue;
+
+                              final avaliable = controller
+                                  .getAttributesAvailabilityInVariation(
+                                      product.productVariations!,
+                                      attribute.name!)
+                                  .contains(attributeValue);
+                              return TChoiceChip(
+                                  text: attributeValue,
+                                  selected: isSelected,
+                                  onSelected: avaliable
+                                      ? (selected) {
+                                          if (selected && avaliable) {
+                                            controller.onAttributeSelected(
+                                                product,
+                                                attribute.name ?? '',
+                                                attributeValue);
+                                          }
+                                        }
+                                      : null);
+                            }).toList(),
+                          ),
+                        ),
+                      ],
+                    ))
+                .toList(),
+          ),
+        ],
+      ),
     );
   }
 }

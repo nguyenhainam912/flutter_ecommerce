@@ -1,18 +1,27 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:ecommt/common/widgets/brands/brand_show_case.dart';
 import 'package:ecommt/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommt/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:ecommt/common/widgets/shimmer/vertival_product_shimmer.dart';
 import 'package:ecommt/common/widgets/texts/section_heading.dart';
-import 'package:ecommt/utils/constants/image_strings.dart';
+import 'package:ecommt/features/shop/controllers/category_controller.dart';
+import 'package:ecommt/features/shop/models/category_model.dart';
+import 'package:ecommt/features/shop/screens/all_products/all_products.dart';
+import 'package:ecommt/features/shop/screens/store/widgets/category_brand.dart';
 import 'package:ecommt/utils/constants/sizes.dart';
+import 'package:ecommt/utils/helpers/cloud_helper_functions.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
 class TCategoryTab extends StatelessWidget {
-  const TCategoryTab({super.key});
+  const TCategoryTab({super.key, required this.category});
+
+  final CategoryModel category;
 
   @override
   Widget build(BuildContext context) {
+    final controller = CategoryController.instance;
     return ListView(
       shrinkWrap: true,
       // physics: NeverScrollableScrollPhysics(),
@@ -22,32 +31,44 @@ class TCategoryTab extends StatelessWidget {
             child: Column(
               children: [
                 // brands
-                TBrandShowcase(
-                  images: [
-                    TImages.productImage1,
-                    TImages.productImage3,
-                    TImages.productImage4
-                  ],
-                ),
-                TBrandShowcase(
-                  images: [
-                    TImages.productImage1,
-                    TImages.productImage3,
-                    TImages.productImage4
-                  ],
-                ),
+                CategoryBrands(category: category),
                 SizedBox(height: TSizes.spaceBtwItems),
 
                 //products
-                TSectionHeading(
-                  title: "You might like",
-                ),
-                SizedBox(height: TSizes.spaceBtwItems),
+                FutureBuilder(
+                    future:
+                        controller.getCategoryProducts(categoryId: category.id),
+                    builder: (context, snapshot) {
+                      /// Helper Function: Handle Loader, No Record, OR ERROR Message
+                      final response =
+                          TCloudHelperFunctions.checkMultiRecordState(
+                              snapshot: snapshot,
+                              loader: const TVerticalProductShimmer());
+                      if (response != null) return response;
 
-                TGridLayout(
-                    itemCount: 4,
-                    itemBuilder: (_, index) => TProductCardVertical()),
-                SizedBox(height: TSizes.spaceBtwSections),
+                      /// Record Found!
+                      final products = snapshot.data!;
+
+                      return Column(
+                        children: [
+                          TSectionHeading(
+                            title: "You might like",
+                            onPressed: () => Get.to(AllProductsScreen(
+                              title: category.name,
+                              futureMethod: controller.getCategoryProducts(
+                                  categoryId: category.id, limit: -1),
+                            )),
+                          ),
+                          SizedBox(height: TSizes.spaceBtwItems),
+                          TGridLayout(
+                              itemCount: products.length,
+                              itemBuilder: (_, index) => TProductCardVertical(
+                                    product: products[index],
+                                  )),
+                          SizedBox(height: TSizes.spaceBtwSections),
+                        ],
+                      );
+                    }),
               ],
             ))
       ],

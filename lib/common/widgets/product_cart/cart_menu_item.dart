@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:ecommt/features/shop/controllers/product/cart_controller.dart';
 import 'package:ecommt/features/shop/screens/cart/cart.dart';
 import 'package:ecommt/utils/constants/colors.dart';
 import 'package:ecommt/utils/helpers/helper_functions.dart';
@@ -10,15 +11,17 @@ import 'package:iconsax/iconsax.dart';
 class TCartCounterIcon extends StatelessWidget {
   const TCartCounterIcon({
     super.key,
-    this.iconColor = TColors.dark,
-    required this.onPressed,
+    this.iconColor,
+    this.counterBgColor,
+    this.counterTextColor,
   });
 
-  final Color iconColor;
-  final VoidCallback onPressed;
+  final Color? iconColor, counterBgColor, counterTextColor;
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
+
+    final controller = Get.put(CartController());
     return Stack(children: [
       IconButton(
           onPressed: () => Get.to(() => CartScreen()),
@@ -33,11 +36,13 @@ class TCartCounterIcon extends StatelessWidget {
                   color: TColors.black,
                   borderRadius: BorderRadius.circular(100)),
               child: Center(
-                child: Text("2",
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelLarge!
-                        .apply(color: TColors.white, fontSizeFactor: 0.8)),
+                child: Obx(
+                  () => Text(controller.noOfCartItems.toString(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge!
+                          .apply(color: TColors.white, fontSizeFactor: 0.8)),
+                ),
               )))
     ]);
   }

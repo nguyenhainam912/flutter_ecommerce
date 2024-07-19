@@ -10,7 +10,13 @@ import 'package:iconsax/iconsax.dart';
 class TProductQuantityWithAddRemove extends StatelessWidget {
   const TProductQuantityWithAddRemove({
     super.key,
+    required this.quantity,
+    this.add,
+    this.remove,
   });
+
+  final int quantity;
+  final VoidCallback? add, remove;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +32,13 @@ class TProductQuantityWithAddRemove extends StatelessWidget {
           size: TSizes.md,
           color: dark ? TColors.white : TColors.black,
           backgroundColor: dark ? TColors.darkGrey : TColors.light,
+          onPressed: remove,
         ),
         SizedBox(
           width: TSizes.spaceBtwItems,
         ),
-        Text("2", style: Theme.of(context).textTheme.titleSmall),
+        Text(quantity.toString(),
+            style: Theme.of(context).textTheme.titleSmall),
         SizedBox(
           width: TSizes.spaceBtwItems,
         ),
@@ -41,6 +49,7 @@ class TProductQuantityWithAddRemove extends StatelessWidget {
           size: TSizes.md,
           color: TColors.white,
           backgroundColor: TColors.primary,
+          onPressed: add,
         ),
       ],
     );

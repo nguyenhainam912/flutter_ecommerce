@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:ecommt/common/widgets/texts/section_heading.dart';
+import 'package:ecommt/features/shop/models/product_model.dart';
 import 'package:ecommt/features/shop/screens/product_details/widgets/bottom_add_to_card.dart';
 import 'package:ecommt/features/shop/screens/product_details/widgets/product_attributes.dart';
 import 'package:ecommt/features/shop/screens/product_details/widgets/product_detail_image_slider.dart';
 import 'package:ecommt/features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:ecommt/features/shop/screens/product_details/widgets/rating_share_widget.dart';
 import 'package:ecommt/features/shop/screens/product_reviews/product_reviews.dart';
+import 'package:ecommt/utils/constants/enums.dart';
 import 'package:ecommt/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,17 +16,21 @@ import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductDetail extends StatelessWidget {
-  const ProductDetail({super.key});
+  const ProductDetail({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: TBottomAddToCard(),
+        bottomNavigationBar: TBottomAddToCard(product: product),
         body: SingleChildScrollView(
           child: Column(
             children: [
               /// product image slider
-              TProductImageSlider(),
+              TProductImageSlider(
+                product: product,
+              ),
 
               /// product detial
               Padding(
@@ -41,16 +47,26 @@ class ProductDetail extends StatelessWidget {
                       ),
 
                       /// price, title, stock, bard
-                      TProductMetaData(),
+
+                      TProductMetaData(
+                        product: product,
+                      ),
                       SizedBox(
                         height: TSizes.spaceBtwItems,
                       ),
 
                       /// attributer
-                      TProductAttributes(),
-                      SizedBox(
-                        height: TSizes.spaceBtwSections,
-                      ),
+
+                      if (product.productType ==
+                          ProductType.variable.toString())
+                        TProductAttributes(
+                          product: product,
+                        ),
+                      if (product.productType ==
+                          ProductType.variable.toString())
+                        SizedBox(
+                          height: TSizes.spaceBtwSections,
+                        ),
 
                       /// checkout button
                       SizedBox(
@@ -70,7 +86,7 @@ class ProductDetail extends StatelessWidget {
                         height: TSizes.spaceBtwItems,
                       ),
                       ReadMoreText(
-                        "This is product description for blue. there are aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                        product.description ?? '',
                         trimLines: 2,
                         trimMode: TrimMode.Line,
                         trimCollapsedText: 'Show more',

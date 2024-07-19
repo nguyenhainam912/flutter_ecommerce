@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:ecommt/bindings/general_bindings.dart';
+import 'package:ecommt/routes/app_routes.dart';
 import 'package:ecommt/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -19,6 +20,7 @@ class App extends StatelessWidget {
         darkTheme: TAppTheme.darkTheme,
         debugShowCheckedModeBanner: false,
         initialBinding: GeneralBindings(),
+        getPages: AppRoutes.pages,
         home: Scaffold(
             backgroundColor: TColors.primary,
             body:
