@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, dead_code
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommt/data/services/firebase_storage_service.dart';
@@ -31,6 +31,7 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
+      print(e.toString());
       throw "Something sent wrong. Please try again";
     }
   }
@@ -76,11 +77,11 @@ class ProductRepository extends GetxController {
       final querySnapshot = limit == -1
           ? await _db
               .collection('Products')
-              .where('Brand. Id', isEqualTo: brandId)
+              .where('Brand.Id', isEqualTo: brandId)
               .get()
           : await _db
               .collection('Products')
-              .where('Brand. Id', isEqualTo: brandId)
+              .where('Brand.Id', isEqualTo: brandId)
               .limit(limit)
               .get();
       final products = querySnapshot.docs

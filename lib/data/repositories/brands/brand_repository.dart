@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommt/data/services/firebase_storage_service.dart';
 import 'package:ecommt/features/shop/models/brand_model.dart';
 import 'package:ecommt/utils/exceptions/firebase_exceptions.dart';
 import 'package:ecommt/utils/exceptions/format_exceptions.dart';
@@ -26,7 +27,7 @@ class BrandRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong while fetching Banners.';
+      throw 'Something went wrong while fetching Brands.';
     }
   }
 
@@ -59,7 +60,28 @@ class BrandRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong while fetching Banners.';
+      throw 'Something went wrong while fetching Brands.';
+    }
+  }
+
+  Future<void> uploadDummyData(List<BrandModel> brands) async {
+    try {
+      final storage = Get.put(TFirebaseStorageService());
+
+      for (var brand in brands) {
+        final file = await storage.getImageDataFromAssets(brand.image);
+        final url = await storage.uploadImageData("Brands", file, brand.name);
+
+        brand.image = url;
+
+        await _db.collection("Brands").doc(brand.id).set(brand.toJson());
+      }
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something sent wrong. Please try again";
     }
   }
 }

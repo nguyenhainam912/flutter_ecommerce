@@ -34,10 +34,11 @@ class CartController extends GetxController {
     }
     // Out of Stock Status
     if (product.productType == ProductType.variable.toString()) {
-      if (variationController.selectedVariation.value.stock < 1) {}
-      TLoaders.warningSnackBar(
-          message: 'Selected variation is out of stock.', title: 'Oh Snap!');
-      return;
+      if (variationController.selectedVariation.value.stock < 1) {
+        TLoaders.warningSnackBar(
+            message: 'Selected variation is out of stock.', title: 'Oh Snap!');
+        return;
+      }
     } else {
       if (product.stock < 1) {
         TLoaders.warningSnackBar(

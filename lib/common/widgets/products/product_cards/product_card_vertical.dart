@@ -16,6 +16,7 @@ import 'package:ecommt/utils/constants/enums.dart';
 import 'package:ecommt/utils/constants/sizes.dart';
 import 'package:ecommt/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class TProductCardVertical extends StatelessWidget {
@@ -96,20 +97,22 @@ class TProductCardVertical extends StatelessWidget {
                 padding: EdgeInsets.only(left: TSizes.sm),
                 child: Row(
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TProductTitleText(
-                          title: product.title,
-                          smallSize: true,
-                        ),
-                        SizedBox(
-                          height: TSizes.spaceBtwItems / 2,
-                        ),
-                        TBrandTitleWithVerifiedIcon(
-                          title: product.brand!.name,
-                        ),
-                      ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TProductTitleText(
+                            title: product.title,
+                            smallSize: true,
+                          ),
+                          SizedBox(
+                            height: TSizes.spaceBtwItems / 2,
+                          ),
+                          TBrandTitleWithVerifiedIcon(
+                            title: product.brand!.name,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 )),

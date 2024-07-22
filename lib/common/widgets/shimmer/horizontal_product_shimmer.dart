@@ -21,7 +21,7 @@ class THorizontalProductShimmer extends StatelessWidget {
             separatorBuilder: (context, index) =>
                 const SizedBox(width: TSizes.spaceBtwItems),
             itemBuilder: (_, __) =>
-                const Row(mainAxisSize: MainAxisSize.min, children: [
+                Row(mainAxisSize: MainAxisSize.min, children: [
                   /// Image
                   TShimmerEffect(width: 120, height: 120),
                   SizedBox(width: TSizes.spaceBtwItems),
@@ -29,8 +29,13 @@ class THorizontalProductShimmer extends StatelessWidget {
                   /// text
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [],
+                    children: [
+                      TShimmerEffect(width: 160, height: 10),
+                      SizedBox(height: TSizes.spaceBtwSections),
+                      TShimmerEffect(width: 120, height: 10),
+                      SizedBox(height: TSizes.spaceBtwSections),
+                      TShimmerEffect(width: 80, height: 10),
+                    ],
                   )
                 ])));
   }

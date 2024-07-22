@@ -16,48 +16,58 @@ class VariationController extends GetxController {
   /// Select Attribute, and Variation
   void onAttributeSelected(
       ProductModel product, attributeName, attributeValue) {
-    // When attribute is selected we will first add that attribute to the selectedAttributes
-    final selectedAttributes =
-        Map<String, dynamic>.from(this.selectedAttributes);
-    selectedAttributes[attributeName] = attributeValue;
-    this.selectedAttributes[attributeName] = attributeValue;
+    try {
+      // When attribute is selected we will first add that attribute to the selectedAttributes
+      final selectedAttributes =
+          Map<String, dynamic>.from(this.selectedAttributes);
+      selectedAttributes[attributeName] = attributeValue;
+      this.selectedAttributes[attributeName] = attributeValue;
 
-    final selectedVariation = product.productVariations!.firstWhere(
-        (variation) => _isSameAttributeValues(
-            variation.attributeValues, selectedAttributes),
-        orElse: () => ProductVariationModel.empty());
+      final selectedVariation = product.productVariations!.firstWhere(
+          (variation) => _isSameAttributeValues(
+              variation.attributeValues, selectedAttributes),
+          orElse: () => ProductVariationModel.empty());
 
-    // Show the selected Variation image as a Main Image
-    if (selectedVariation.image.isNotEmpty) {
-      ImageController.instance.selectedProductImage.value =
-          selectedVariation.image;
+      print(selectedVariation
+          .image); // Show the selected Variation image as a Main Image
+      if (selectedVariation.image.isNotEmpty) {
+        ImageController.instance.selectedProductImage.value =
+            selectedVariation.image;
+      }
+
+      // Show selected variation quantity already in the cart.
+      if (selectedVariation.id.isNotEmpty) {
+        final cartController = CartController.instance;
+        cartController.productQuantityInCart.value = cartController
+            .getVariationQuantityInCart(product.id, selectedVariation.id);
+      }
+
+      // Assign Selected Variation
+      this.selectedVariation.value = selectedVariation;
+      // Update selected product variation status
+      getProductVariationStockStatus();
+    } catch (e) {
+      print(e.toString());
     }
-
-    // Show selected variation quantity already in the cart.
-    if (selectedVariation.id.isNotEmpty) {
-      final cartController = CartController.instance;
-      cartController.productQuantityInCart.value = cartController
-          .getVariationQuantityInCart(product.id, selectedVariation.id);
-    }
-
-    // Assign Selected Variation
-    this.selectedVariation.value = selectedVariation;
-    // Update selected product variation status
-    getProductVariationStockStatus();
   }
 
   //Check If selected attributes matches any variation attributes
   bool _isSameAttributeValues(Map<String, dynamic> variationAttributes,
       Map<String, dynamic> selectedAttributes) {
-    // If selectedAttributes contains 3 attributes and current variation contains 2 then return.
-    if (variationAttributes.length != selectedAttributes.length) return false;
+    try {
+      // If selectedAttributes contains 3 attributes and current variation contains 2 then return.
+      if (variationAttributes.length != selectedAttributes.length) return false;
 
-    // If any of the attributes is different then return. e.g. [Green, Large] x [Green, Small]
-    for (final key in variationAttributes.keys) {
-      // Attributes[key] = Value which could be [Green, Small, Cotton] etc.
-      if (variationAttributes[key] = selectedAttributes[key]) return false;
+      // If any of the attributes is different then return. e.g. [Green, Large] x [Green, Small]
+      for (final key in variationAttributes.keys) {
+        // Attributes[key] = Value which could be [Green, Small, Cotton] etc.
+        if (variationAttributes[key] != selectedAttributes[key]) return false;
+      }
+      return true;
+    } catch (e) {
+      print(e.toString());
+      return false;
     }
-    return true;
   }
 
   /// Check Attribute availability / Stock in Variation

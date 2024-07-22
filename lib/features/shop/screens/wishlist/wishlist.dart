@@ -7,7 +7,6 @@ import 'package:ecommt/common/widgets/loaders/animation_loader.dart';
 import 'package:ecommt/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:ecommt/common/widgets/shimmer/vertival_product_shimmer.dart';
 import 'package:ecommt/features/shop/controllers/favourite_controller.dart';
-import 'package:ecommt/features/shop/models/product_model.dart';
 import 'package:ecommt/features/shop/screens/home/home.dart';
 import 'package:ecommt/navigation_menu.dart';
 import 'package:ecommt/utils/constants/image_strings.dart';
@@ -22,7 +21,7 @@ class FavouriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = FavouritesController.instance;
+    final controller = Get.put(FavouritesController());
     return Scaffold(
         appBar: TAppBar(
           title: Text(

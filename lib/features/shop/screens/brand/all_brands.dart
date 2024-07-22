@@ -16,7 +16,7 @@ class AllBrandsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = BrandController.instance;
+    final controller = Get.put(BrandController()); //BrandController.instance;
     return Scaffold(
       appBar: TAppBar(
         title: Text("Brand"),
@@ -38,7 +38,10 @@ class AllBrandsScreen extends StatelessWidget {
 
                 /// brands
                 Obx(() {
-                  if (controller.isLoading.value) return TBrandsShimmer();
+                  if (controller.isLoading.value)
+                    return TBrandsShimmer(
+                      itemCount: controller.allBrands.length,
+                    );
 
                   if (controller.allBrands.isEmpty)
                     return Center(

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommt/utils/constants/colors.dart';
 import 'package:ecommt/utils/constants/sizes.dart';
 import 'package:ecommt/utils/helpers/helper_functions.dart';
@@ -13,12 +14,14 @@ class TVertivalImageText extends StatelessWidget {
     this.textColor = TColors.white,
     this.backgroundColor,
     this.onTap,
+    this.isNetworkImage = false,
   });
 
   final String image, title;
   final Color textColor;
   final Color? backgroundColor;
   final void Function()? onTap;
+  final bool isNetworkImage;
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +42,20 @@ class TVertivalImageText extends StatelessWidget {
                             : TColors.white),
                     borderRadius: BorderRadius.circular(100)),
                 child: Center(
-                    child: Image(
-                  image: AssetImage(image),
-                  fit: BoxFit.cover,
-                  color: THelperFunctions.isDarkMode(context)
-                      ? TColors.light
-                      : TColors.dark,
-                ))),
+                    child: isNetworkImage
+                        ? CachedNetworkImage(
+                            imageUrl: image,
+                            fit: BoxFit.cover,
+                            progressIndicatorBuilder: (context, url, error) =>
+                                Icon(Icons.error),
+                          )
+                        : Image(
+                            image: AssetImage(image),
+                            fit: BoxFit.cover,
+                            color: THelperFunctions.isDarkMode(context)
+                                ? TColors.light
+                                : TColors.dark,
+                          ))),
             SizedBox(
               height: TSizes.spaceBtwItems / 2,
             ),

@@ -7,6 +7,7 @@ import 'package:ecommt/common/widgets/list_title.dart/user_profile_title.dart';
 import 'package:ecommt/common/widgets/texts/section_heading.dart';
 import 'package:ecommt/features/personalization/screens/address/address.dart';
 import 'package:ecommt/features/personalization/screens/profile/profile.dart';
+import 'package:ecommt/features/personalization/screens/upload_data/upload_data.dart';
 import 'package:ecommt/features/shop/screens/order/order.dart';
 import 'package:ecommt/utils/constants/colors.dart';
 import 'package:ecommt/utils/constants/sizes.dart';
@@ -122,6 +123,7 @@ class SettingsScreen extends StatelessWidget {
                 icon: Iconsax.document,
                 title: 'Load Data',
                 subTitle: 'Upload data to your firebase',
+                onTap: () => Get.to(() => UploadDataScreen()),
               ),
 
               ///

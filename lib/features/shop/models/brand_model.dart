@@ -46,7 +46,7 @@ class BrandModel {
         id: document.id,
         name: data['Name'] ?? '',
         image: data['Image'] ?? '',
-        isFeatured: data['IsFeatured'] ?? '',
+        isFeatured: data['IsFeatured'] ?? false,
         productCount: data['ProductCount'] ?? '',
       );
     } else {
