@@ -57,8 +57,9 @@ class CartController extends GetxController {
     if (index >= 0) {
       // This quantity is already added or Updated/Removed from the design (Cart)(-)
       cartItems[index].quantity = selectedCartItem.quantity;
-    } else {}
-    cartItems.add(selectedCartItem);
+    } else {
+      cartItems.add(selectedCartItem);
+    }
     updateCart();
     TLoaders.customToast(message: 'Your Product has been added to the Cart.');
   }
@@ -69,8 +70,9 @@ class CartController extends GetxController {
         cartItem.variationId == item.variationId);
     if (index >= 0) {
       cartItems[index].quantity += 1;
+    } else {
       cartItems.add(item);
-    } else {}
+    }
     updateCart();
   }
 
@@ -171,7 +173,7 @@ class CartController extends GetxController {
 
   void saveCartItems() {
     final cartItemStrings = cartItems.map((item) => item.toJson()).toList();
-    TLocalStorage.instance().saveData('cartItens', cartItemStrings);
+    TLocalStorage.instance().saveData('cartItems', cartItemStrings);
   }
 
   void loadCartItems() {

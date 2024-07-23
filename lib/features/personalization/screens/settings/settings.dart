@@ -5,6 +5,7 @@ import 'package:ecommt/common/widgets/custom_shapes/containers/primary_header_co
 import 'package:ecommt/common/widgets/list_title.dart/settings_menu_title.dart';
 import 'package:ecommt/common/widgets/list_title.dart/user_profile_title.dart';
 import 'package:ecommt/common/widgets/texts/section_heading.dart';
+import 'package:ecommt/features/authentication/controllers/logout/logout_controller.dart';
 import 'package:ecommt/features/personalization/screens/address/address.dart';
 import 'package:ecommt/features/personalization/screens/profile/profile.dart';
 import 'package:ecommt/features/personalization/screens/upload_data/upload_data.dart';
@@ -161,7 +162,12 @@ class SettingsScreen extends StatelessWidget {
               ),
               SizedBox(
                 width: double.infinity,
-                child: OutlinedButton(onPressed: () {}, child: Text("Logout")),
+                child: OutlinedButton(
+                    onPressed: () {
+                      final controller = Get.put(LogoutController());
+                      controller.logout();
+                    },
+                    child: Text("Logout")),
               ),
               SizedBox(
                 height: TSizes.spaceBtwSections * 2.5,

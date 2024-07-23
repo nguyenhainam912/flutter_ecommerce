@@ -54,9 +54,10 @@ class AddressController extends GetxController {
         content: const CircularProgressIndicator(),
       );
       // Clear the "selected" field
-      if (selectedAddress.value.id.isNotEmpty) {}
-      await addressRepository.updateSelectedField(
-          selectedAddress.value.id, false);
+      if (selectedAddress.value.id.isNotEmpty) {
+        await addressRepository.updateSelectedField(
+            selectedAddress.value.id, false);
+      }
       // Assign selected address
       newSelectedAddress.selectedAddress = true;
       selectedAddress.value = newSelectedAddress;
@@ -120,12 +121,12 @@ class AddressController extends GetxController {
           'Storing Address...', TImages.docerAnimation);
       //  Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
-      if (isConnected) {
+      if (!isConnected) {
         TFullScreenLoader.stopLoading();
         return;
       }
       //  Form Validation
-      if (addressFormKey.currentState!.validate()) {
+      if (!addressFormKey.currentState!.validate()) {
         TFullScreenLoader.stopLoading();
         return;
       }

@@ -130,7 +130,7 @@ class AuthenticationRepository extends GetxController {
   /// logout
   Future<void> logout() async {
     try {
-      await GoogleSignIn().signOut();
+      // await GoogleSignIn().signOut();
       await FirebaseAuth.instance.signOut();
       Get.offAll(() => LoginScreen());
     } on FirebaseAuthException catch (e) {

@@ -118,7 +118,7 @@ class AddNewAddressScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     child: Text("Save"),
-                    onPressed: () {},
+                    onPressed: () => controller.addNewAddresses(),
                   ))
             ],
           ),

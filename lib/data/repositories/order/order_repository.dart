@@ -33,7 +33,8 @@ FUNCTIONS */
           .doc(userId)
           .collection('Orders')
           .add(order.toJson());
-    } catch (e) {}
-    throw 'Something went wrong while saving Order Information. Try again later';
+    } catch (e) {
+      throw 'Something went wrong while saving Order Information. Try again later';
+    }
   }
 }

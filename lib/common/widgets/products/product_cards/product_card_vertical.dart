@@ -16,7 +16,6 @@ import 'package:ecommt/utils/constants/enums.dart';
 import 'package:ecommt/utils/constants/sizes.dart';
 import 'package:ecommt/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class TProductCardVertical extends StatelessWidget {
